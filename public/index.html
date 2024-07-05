@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logitech App</title>
+  <link rel="stylesheet" href="bootstrap-5.1.3/css/bootstrap.min.css">
+  <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      background-color: white;
+      background-image: url("");
+      background-repeat: no-repeat;
+      background-size: 1400px 1000px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" class="logo" href="#"><img class="rounded-pill" src="images/Logo.png" alt="" height="40px"> LogiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link text-dark fw-bold" href="#home">Home</a>
+          <a class="nav-link text-dark fw-bold" href="#contact">Contact Us</a>
+          <a class="nav-link text-dark fw-bold" href="#trackingpage">Tracking Page</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class=""><br><br><br>
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: transparent;">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-4 display-3 text-dark fw-bold ls-tight">
+              Tracking Management System <br />
+            </h1>
+            <p class="text-dark">
+              A Tracking Management System is a software solution designed to streamline and optimize the operations of warehouses and distribution centers. It leverages web technologies to provide users with a centralized platform for managing inventory, shipments, and tracking. 
+            </p>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form>
+                  <!-- Email input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="email" class="form-control" />
+                    <label class="form-label" for="email">Email address</label>
+                  </div>
+
+                  <!-- Password input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="password" class="form-control" />
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button type="button" id="login" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                    Log In
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <div class="container">
+    <section id="contact" class="py-5">
+      <div class="position-relative py-5">
+        <div class="position-absolute"><img alt="" class="img-fluid" src=""></div>
+        <div class="position-relative">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="bg-white p-5 rounded shadow mt-5">
+                  <h2 class="display-6 fw-bold text-center mb-4">Contact Us</h2>
+                  <form id="contactform">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="mb-3">
+                          <input class="form-control bg-light" placeholder="Your name" type="text" id="name">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="mb-3">
+                          <input class="form-control bg-light" placeholder="Your email" type="text" id="Email">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="mb-3">
+                          <textarea class="form-control bg-light" placeholder="Your message" rows="4" id="message"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="d-grid">
+                          <button class="btn btn-primary" type="submit" id="send">Send message</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyBSLK6e9VVMvooAtuZNwfpLuo7x5Rgp1bc",
+      authDomain: "logitech-784bc.firebaseapp.com",
+      databaseURL: "https://logitech-784bc-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "logitech-784bc",
+      storageBucket: "logitech-784bc.appspot.com",
+      messagingSenderId: "711401048123",
+      appId: "1:711401048123:web:f85110fd43674dc2fe341e",
+      measurementId: "G-NZ1XLXE3VQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
+
+    document.getElementById("send").addEventListener('click', function(e){
+      set(ref(db, 'contact/' + document.getElementById("name").value), {
+        name: document.getElementById("name").value,
+        email: document.getElementById("Email").value,
+        message: document.getElementById("message").value
+      });
+      alert("Message Sent!");
+    });
+
+    // Login
+    document.getElementById("login").addEventListener('click', function(e) {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const dt = new Date();
+        if (user.uid === "pSnYkVP5U2XxsTPvCB3vstqa5Wl2") {
+          update(ref(db, 'login/' + user.uid), {
+            last_login: dt.toString()
+          });
+          alert("Login Success");
+          window.location.href = "admin.html";
+        } else {
+          update(ref(db, 'login/' + user.uid), {
+            last_login: dt.toString()
+          });
+          alert("Login Success");
+          window.location.href = "homepage.html";
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+    });
+  </script>
+</body>
+</html>
+
